@@ -1,6 +1,3 @@
-# install.ps1 — Eternal Write Windows one-click
-# Daniel H. Fingal — November 25 2025 — MIT License
-
 $ErrorActionPreference = "Stop"
 $eternalDir = "$env:USERPROFILE\.eternal_write"
 $binDir = "$eternalDir\bin"
@@ -8,14 +5,10 @@ $vaultDir = "$eternalDir\public_vault"
 
 Write-Host "ETERNAL WRITE — Installing immortal provenance engine..." -ForegroundColor Cyan
 
-# Create directories
 New-Item -ItemType Directory -Force -Path $binDir, $vaultDir | Out-Null
 
-# Download ew.py (the CLI)
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/danielhfingal/eternal/main/ew.py" -OutFile "$binDir\ew.py"
 
-# Add to PATH forever
-$regPath = "HKCU:\Environment"
 $currentPath = [Environment]::GetEnvironmentVariable("PATH", "User")
 if (-not ($currentPath -split ";" | Where-Object { $_ -eq $binDir })) {
     $newPath = "$currentPath;$binDir"
