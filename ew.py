@@ -1,10 +1,4 @@
 #!/usr/bin/env python3
-"""
-ew.py — Eternal Write CLI
-Daniel H. Fingal — First Thought Provenance Engine
-November 25 2025 — You own this forever.
-"""
-
 import sys
 import json
 import hashlib
@@ -35,7 +29,6 @@ def stamp_idea(text: str):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(entry, f, indent=2)
 
-    # OpenTimestamps stamp
     try:
         subprocess.run(["ots", "stamp", str(path)], check=False, capture_output=True)
         print(f"✓ Bitcoin-timestamped: {idea[:60]}{'...' if len(idea)>60 else ''}")
